@@ -25,6 +25,9 @@ above).
 _Caution: Values returned in METARs and SPECIs may not follow the above conventions. Each country uses their
 own units in these reports._
 
+## Data Format
+Data will be returned in JSON format only.
+
 # Group Weather
 Weather for planning purposes is available. They are categorized into two different groups:
 
@@ -298,8 +301,16 @@ touches, or is contained by the airspace.
     + Body
 
             FIXME
-            
-            
-            
+
+# Group Countries            
+ICAO also defines codes for each country (also known as Nationality Codes).
+
+A few modifications have been made to these codes for the aerodrome.io usage:
+
+| Nationality/Area | Notes | Code |
+| ---------------- | ----- | :--: |
+| Contiguous United States | The USA does not have unique identifiers country wide. As such, we use 6 different nationality codes (K1-K6) to break up the country. | K1,K2,K3,K4,K5,K6 |
+| Antarctica | Antarctica uses a special aerodrome.io only code. | A1 |
+                        
             
                         
