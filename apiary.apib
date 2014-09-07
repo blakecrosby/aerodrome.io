@@ -1,0 +1,305 @@
+FORMAT: 1A
+HOST: http://aerodrome.io/api
+
+# aerodrome.io
+aerodrome.io is an API service that allows you to retreive aviation relation data for flight planning purposes.
+
+**Note: The data used on this website is not to be used for navigation.**
+
+## Conventions
+The following conventions will be used for all returned and submitted data:
+
+*  **Distance**: Great Circle distance calculated in nautical miles (1852 meters) using the WGS84 sphereoid.
+*  **Temperature**: Degrees Celcius.
+*  **Time**: 24 hour, Universal Coordinated Time.
+*  **Wind Speed**: Knots (0.5144 m/s or 1.852 km/h).
+*  **Heights, Altitude, and Elevation**: Feet above sea level (1 foot = 0.3048 meters).
+*  **Geographic Representation**: GeoJSON format (http://geojson.org/geojson-spec.html).
+*  **Atmospheric Pressure**: Hectopascals (0.0295 inHg).
+*  **Identifiers**: ICAO standard. (eg: YSSY not SYD)
+*  **String Encoding**: UTF-8
+
+All values will have their units missing, so it's important to know which unit is used for which value (as noted
+above).
+
+_Caution: Values returned in METARs and SPECIs may not follow the above conventions. Each country uses their
+own units in these reports._
+
+# Group Weather
+Weather for planning purposes is available. They are categorized into two different groups:
+
+## Observations [/observation/{ident}]
+Observations are _actual_ weather conditions as they are happening now. This will include METAR, SPECI, PIREP,
+and volcanic ash reports. 
+
+It is important to take note of the reported time as weather conditions can change quickly.
+
+### Specific Aerodrome [GET]
+The last four hours of observations will be returned. This will include both METARs and SPECIs
+for the requested aerodrome.
+
++ Parameters
+    + ident (string) ... The ICAO identifier of the observation station.
+    
+
++ Response 200 (application/json)
+    + Body
+    
+            FIXME
+
+### Search Along A Route or A Specific Point [POST]
+The last four hours of observations will be returned. This will include both METARs, SPECIs, and PIREPs within the 
+defined radius.
+
+POST data must be valid GeoJSON, with the radius (in nautical miles) defined as an individual property.
+
+Supported Geometry Types:
+
+* POINT
+* LINESTRING
+
+_Note: The `ident` parameter is not required, and will be ignored._
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "type":"Point",
+                "coordinates":[
+                    100.0,
+                    0.0
+                ],
+                "properties": {"radius": 10}
+            }
+
+
++ Response 200 (application/javascript)
+
+    + Body
+
+            FIXME
+
+## Forecasts [/forecast/{ident}]
+Forecasts are _predicted_ weather conditions for a specific time in the future. This will include
+TAFs, upper wind and temperature forecasts, and SIGMETs. 
+
+It is important to take note of the validity period of the returned data as forecasts are only valid
+for a specific period of time.
+
+### Specific Aerodrome [GET]
+The latest forecast of each type will be returned.
+
++ Parameters
+    + ident (string) ... The ICAO identifier of the observation station.
+
++ Response 200 (application/json)
+    + Body
+    
+            FIXME
+
+### Search Along A Route or A Specific Point [POST]
+The latest forecast of each type will be returned.
+
+POST data must be valid GeoJSON, with the radius (in nautical miles) defined as an individual property.
+
+Supported Geometry Types:
+
+* POINT
+* LINESTRING
+
+_Note: The `ident` parameter is not required, and will be ignored._
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "type":"Point",
+                "coordinates":[
+                    100.0,
+                    0.0
+                ],
+                "properties": {"radius": 10}
+            }
+
+
++ Response 200 (application/javascript)
+
+    + Body
+
+            FIXME
+
+# Group Navaids
+Navaids are categorized into multiple types, such as: Airport, NDB, VOR, and R-Nav intersections.
+
+Navaid identifiers are not globally unique. Because of this limitation all requests must also include the
+the country in which the navaid is located. Please see the Countries section for more information.
+
+## List Navaid Types [/navaid/type]
+### GET
+Get a list of all available navaid types.
+
++ Response 200 (application/javascript)
+
+    + Body
+    
+            FIXME
+            
+## Specific Navaid [/navaid/{type}/{country}/{ident}]
+### GET 
+Get information about a specific navaid.
+
++ Parameters
+    + type (required,string,`NDB`) ... The navaid type (airport,ndb,vor, etc..)
+    + country (required,string,`CY`) ... The ICAO country code (Y,CY,K2, etc..)
+    + ident (required,string,`VR`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
+
++ Response 200 (application/javascript)
+
+    + Body
+    
+            FIXME
+            
+## Searching [/navaid/search/{ident}]
+You can search for a particular navaid using an identifier or geographic reference.
+
+### POST
+Return a list of navaids within a specific radius.
+
+If `ident` is specified, then search results will be filtered for that identifier only.
+
+POST data must be valid GeoJSON, with the radius (in nautical miles) defined as an individual property.
+
+Supported Geometry Types:
+
+* POINT
+* LINESTRING
+
++ Parameters
+    + ident (optional,string,`KZ`) ... The ident of the navaid that you want to search for.
++ Request (application/json)
+
+    + Body
+    
+            {
+                "type":"Point",
+                "coordinates":[
+                    100.0,
+                    0.0
+                ],
+                "properties": {"radius": 10}
+            }
+
+
++ Response 200 (application/javascript)
+
+    + Body
+
+            FIXME
+
+### GET
+This call will return all navaids that match `ident`. 
+
++ Parameters
+    + ident (required,string,`KZ`) ... The airway identifier.
+    
++ Response 200 (application/javascript)
+
+    + Body
+    
+            FIXME
+
+# Group Airways
+Airways are predefined routes that use navaids as waypoints.
+
+## Specific Airway [/airway/{ident}]
+
+### GET
+This call will return the list of navaids in order that make up the airway.
+
++ Parameters
+    + ident (string) ... The airway identifier.
+    
++ Response 200 (application/javascript)
+
+    + Body
+    
+            FIXME
+            
+## Find Airways Crossing Route [/airway/search/]
+
+### POST
+This call will return the list of airways that cross your route.
+
+POST data must be valid GeoJSON.
+
+Supported Geometry Types:
+
+* LINESTRING
+
++ Request (application/json)
+
+    + Body
+    
+            FIXME
+            {
+                "type":"Point",
+                "coordinates":[
+                    100.0,
+                    0.0
+                ],
+                "properties": {"radius": 10}
+            }
+
+
++ Response 200 (application/javascript)
+
+    + Body
+
+            FIXME
+
+# Group Airspace            
+Airspace is defined areas where special rules apply. There are generally two main types of 
+airspace: Special Use Airspace (SUA) and all others.
+
+SUA are typically areas that are prohibited to all aircraft from entering without special permission
+from the controlling agency. 
+
+## Search Along A Route or A Specific Point [/airspace/search]
+
+### POST
+POST data must be valid GeoJSON, with the radius (in nautical miles) defined as an individual property.
+
+Supported Geometry Types:
+
+* POINT
+* LINESTRING
+
+This call will return airspace definitions (in GeoJSON) for which the point or linestring intersect,
+touches, or is contained by the airspace.
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "type":"Point",
+                "coordinates":[
+                    100.0,
+                    0.0
+                ],
+                "properties": {"radius": 10}
+            }
+
+
++ Response 200 (application/javascript)
+
+    + Body
+
+            FIXME
+            
+            
+            
+            
+                        
