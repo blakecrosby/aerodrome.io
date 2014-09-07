@@ -77,7 +77,7 @@ _Note: The `ident` parameter is not required, and will be ignored._
             }
 
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
 
@@ -127,7 +127,7 @@ _Note: The `ident` parameter is not required, and will be ignored._
             }
 
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
 
@@ -143,7 +143,7 @@ the country in which the navaid is located. Please see the Countries section for
 ### GET
 Get a list of all available navaid types.
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
     
@@ -158,7 +158,7 @@ Get information about a specific navaid.
     + country (required,string,`CY`) ... The ICAO country code (Y,CY,K2, etc..)
     + ident (required,string,`VR`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
     
@@ -195,7 +195,7 @@ Supported Geometry Types:
             }
 
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
 
@@ -207,7 +207,7 @@ This call will return all navaids that match `ident`.
 + Parameters
     + ident (required,string,`KZ`) ... The airway identifier.
     
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
     
@@ -224,7 +224,7 @@ This call will return the list of navaids in order that make up the airway.
 + Parameters
     + ident (string) ... The airway identifier.
     
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
     
@@ -256,7 +256,7 @@ Supported Geometry Types:
             }
 
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
 
@@ -296,7 +296,7 @@ touches, or is contained by the airspace.
             }
 
 
-+ Response 200 (application/javascript)
++ Response 200 (application/json)
 
     + Body
 
@@ -305,12 +305,19 @@ touches, or is contained by the airspace.
 # Group Countries            
 ICAO also defines codes for each country (also known as Nationality Codes).
 
-A few modifications have been made to these codes for the aerodrome.io usage:
+A few modifications have been made to these codes for aerodrome.io usage:
 
 | Nationality/Area | Notes | Code |
 | ---------------- | ----- | :--: |
 | Contiguous United States | The USA does not have unique identifiers country wide. As such, we use 6 different nationality codes (K1-K6) to break up the country. | K1,K2,K3,K4,K5,K6 |
-| Antarctica | Antarctica uses a special aerodrome.io only code. | A1 |
-                        
-            
-                        
+| Antarctica | Antarctica uses the special "A1" code. Please note that each aerodrome in Antarctica is maintained by their respective nationalities. | A1 |
+
+### GET /countries
+Get a list of all supported countries
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            FIXME
