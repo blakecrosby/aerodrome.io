@@ -2,6 +2,7 @@
 
 class Navaid extends CI_Controller {
 
+    # /api/navaid/types
 	public function types()	{
 
         $this->load->model('navaids');
@@ -16,5 +17,30 @@ class Navaid extends CI_Controller {
         }
 
 	}
+
+    # /api/navaid/{type}/{country}/{ident}
+    # See config/routes
+    public function index($type,$country,$ident) {
+
+        $this->load->model('navaids');
+
+        $data['data'] = $this->navaids->get($type,$country,$ident);
+
+        # Add the TZ Offset from tzid
+        $dateTimeZoneLocal = new DateTimeZone($data['data'][0]->tzid);
+        $dateTimeZoneUTC = new DateTimeZone('Etc/UTC');
+        $dateTimeUTC = new DateTime("now",$dateTimeZoneUTC);
+        $timeOffset = $dateTimeZoneLocal->getOffset($dateTimeUTC);
+
+        $data['data'][0]->utc_offset = $timeOffset;
+
+        if (isset($data['data']->error)) {
+            $this->load->view("error",$data);
+        }
+        else {
+            $this->load->view('json',$data);
+        }
+
+    }
 }
 
