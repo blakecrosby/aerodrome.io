@@ -139,7 +139,7 @@ Navaids are categorized into multiple types, such as: Airport, NDB, VOR, and R-N
 Navaid identifiers are not globally unique. Because of this limitation all requests must also include the
 the country in which the navaid is located. Please see the Countries section for more information.
 
-## List Navaid Types [/navaid/type]
+## List Navaid Types [/navaid/types]
 ### GET
 Get a list of all available navaid types.
 
@@ -147,7 +147,28 @@ Get a list of all available navaid types.
 
     + Body
     
-            FIXME
+            [
+                {
+                    "id": "1",
+                    "type": "AIRPORT"
+                },
+                {
+                    "id": "2",
+                    "type": "NDB"
+                },
+                {
+                    "id": "3",
+                    "type": "VOR"
+                },
+                {
+                    "id": "4",
+                    "type": "VORTAC"
+                },
+                {
+                    "id": "5",
+                    "type": "VORDME"
+                }
+            ]
             
 ## Specific Navaid [/navaid/{type}/{country}/{ident}]
 ### GET 
