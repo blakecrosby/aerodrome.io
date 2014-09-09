@@ -12,12 +12,14 @@ The following conventions will be used for all returned and submitted data:
 *  **Distance**: Great Circle distance calculated in nautical miles (1852 meters) using the WGS84 sphereoid.
 *  **Temperature**: Degrees Celcius.
 *  **Time**: 24 hour, Universal Coordinated Time.
+*  **Time Zone Offsets**: Seconds from UTC.
 *  **Wind Speed**: Knots (0.5144 m/s or 1.852 km/h).
 *  **Heights, Altitude, and Elevation**: Feet above sea level (1 foot = 0.3048 meters).
 *  **Geographic Representation**: GeoJSON format (http://geojson.org/geojson-spec.html).
 *  **Atmospheric Pressure**: Hectopascals (0.0295 inHg).
 *  **Identifiers**: ICAO standard. (eg: YSSY not SYD)
 *  **String Encoding**: UTF-8
+*  **Magnetic Variation**: Degrees from magnetic north (positive values: West, negative values: East) using the International Geomagnetic Reference Field Model
 
 All values will have their units missing, so it's important to know which unit is used for which value (as noted
 above).
@@ -139,7 +141,7 @@ Navaids are categorized into multiple types, such as: Airport, NDB, VOR, and R-N
 Navaid identifiers are not globally unique. Because of this limitation all requests must also include the
 the country in which the navaid is located. Please see the Countries section for more information.
 
-## List Navaid Types [/navaid/type]
+## List Navaid Types [/navaid/types]
 ### GET
 Get a list of all available navaid types.
 
@@ -147,7 +149,28 @@ Get a list of all available navaid types.
 
     + Body
     
-            FIXME
+            [
+                {
+                    "id": 1,
+                    "type": "AIRPORT"
+                },
+                {
+                    "id": 2,
+                    "type": "NDB"
+                },
+                {
+                    "id": 3,
+                    "type": "VOR"
+                },
+                {
+                    "id": 4,
+                    "type": "VORTAC"
+                },
+                {
+                    "id": 5,
+                    "type": "VORDME"
+                }
+            ]
             
 ## Specific Navaid [/navaid/{type}/{country}/{ident}]
 ### GET 
@@ -156,13 +179,27 @@ Get information about a specific navaid.
 + Parameters
     + type (required,string,`NDB`) ... The navaid type (airport,ndb,vor, etc..)
     + country (required,string,`CY`) ... The ICAO country code (Y,CY,K2, etc..)
-    + ident (required,string,`VR`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
+    + ident (required,string,`KZ`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
+
 
 + Response 200 (application/json)
 
     + Body
     
-            FIXME
+            [
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "CY",
+                    "country_name": "Canada",
+                    "type": "NDB",
+                    "navaid_name": "BUTTONVILLE",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
+                    "variation": -10,
+                    "tzid": "America\/Toronto",
+                    "elevation": null,
+                    "utc_offset": -14400
+                }
+            ]
             
 ## Searching [/navaid/search/{ident}]
 You can search for a particular navaid using an identifier or geographic reference.
