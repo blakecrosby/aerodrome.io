@@ -151,23 +151,23 @@ Get a list of all available navaid types.
     
             [
                 {
-                    "id": "1",
+                    "id": 1,
                     "type": "AIRPORT"
                 },
                 {
-                    "id": "2",
+                    "id": 2,
                     "type": "NDB"
                 },
                 {
-                    "id": "3",
+                    "id": 3,
                     "type": "VOR"
                 },
                 {
-                    "id": "4",
+                    "id": 4,
                     "type": "VORTAC"
                 },
                 {
-                    "id": "5",
+                    "id": 5,
                     "type": "VORDME"
                 }
             ]
@@ -179,9 +179,8 @@ Get information about a specific navaid.
 + Parameters
     + type (required,string,`NDB`) ... The navaid type (airport,ndb,vor, etc..)
     + country (required,string,`CY`) ... The ICAO country code (Y,CY,K2, etc..)
-    + ident (required,string,`VR`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
+    + ident (required,string,`KZ`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
 
-+ Request /api/navaid/NDB/CY/KZ
 
 + Response 200 (application/json)
 
