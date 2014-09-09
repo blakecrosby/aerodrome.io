@@ -28,7 +28,7 @@ class Navaids extends CI_Model {
     # Get specific navaid
     function get($type,$country,$ident) {
         $this->db->select(' ident as navaid_ident,country as country_ident,country.name as country_name,
-                            navaidtype.type,
+                            navaidtype.type,navaid.name as navaid_name,
 				            st_asgeojson(navaid.location) as geometry,
 				            (select value from variation
 				                where st_dwithin(navaid.location,variation.location,0.5) limit 1
