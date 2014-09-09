@@ -42,5 +42,39 @@ class Navaid extends CI_Controller {
         }
 
     }
+
+    # /api/search/{ident}
+    # ident is optional
+    public function search($ident = false) {
+
+        # Processing the post data
+        # Validator returns a PHP array if it parsed the json correctly
+        # Otherwise it returns a php Object with error details.
+
+        $json = validateGeoJSON(file_get_contents('php://input'));
+        if (is_array($json)) {
+
+
+
+        }
+        else {
+            $data['data'] = $json;
+        }
+
+
+
+
+
+
+
+        if (isset($data['data']->error)) {
+            $this->load->view("error",$data);
+        }
+        else {
+            $this->load->view('json',$data);
+        }
+    }
+
+
 }
 

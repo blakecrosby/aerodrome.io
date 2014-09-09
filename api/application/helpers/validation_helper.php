@@ -1,7 +1,6 @@
 <?php
 
 # Validate GeoJSON
-
 function validateGeoJSON($json) {
     $json = json_decode(file_get_contents('php://input'));
     $error = new stdClass();
