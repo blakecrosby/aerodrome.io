@@ -181,11 +181,26 @@ Get information about a specific navaid.
     + country (required,string,`CY`) ... The ICAO country code (Y,CY,K2, etc..)
     + ident (required,string,`VR`) ... The ICAO identifier for the navaid (CYYZ,VR,B, etc..)
 
++ Request /api/navaid/NDB/CY/KZ
+
 + Response 200 (application/json)
 
     + Body
     
-            FIXME
+            [
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "CY",
+                    "country_name": "Canada",
+                    "type": "NDB",
+                    "navaid_name": "BUTTONVILLE",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
+                    "variation": -10,
+                    "tzid": "America\/Toronto",
+                    "elevation": null,
+                    "utc_offset": -14400
+                }
+            ]
             
 ## Searching [/navaid/search/{ident}]
 You can search for a particular navaid using an identifier or geographic reference.
