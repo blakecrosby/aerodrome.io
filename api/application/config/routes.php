@@ -42,6 +42,7 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 $route['navaid/(:any)/(:any)/(:any)'] = "navaid/index/$1/$2/$3";
+$route['airway/(:any)/(:any)'] = "airway/index/$1/$2";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
