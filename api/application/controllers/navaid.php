@@ -47,32 +47,28 @@ class Navaid extends CI_Controller {
     # ident is optional
     public function search($ident = false) {
 
-        # Processing the post data
-        # Validator returns a PHP array if it parsed the json correctly
-        # Otherwise it returns a php Object with error details.
-
-        $json = validateGeoJSON(file_get_contents('php://input'));
-        if (is_array($json)) {
+        $this->load->model('navaids');
 
 
-
+        if ($_POST){
+            # Processing the post data
+            # Validator returns a PHP array if it parsed the json correctly
+            # Otherwise it returns a php Object with error details.
+            $json = validateGeoJSON(file_get_contents('php://input'));
+            print_r($json);
+            if (is_array($json)) {
+                $data['data'] = $this->navaids->search($json,$ident);
+                $this->load->view('json',$data);
+            }
+            else {
+                $this->load->view("error",$data);
+            }
         }
         else {
-            $data['data'] = $json;
-        }
-
-
-
-
-
-
-
-        if (isset($data['data']->error)) {
-            $this->load->view("error",$data);
-        }
-        else {
+            $data['data'] = $this->navaids->search(NULL,$ident);
             $this->load->view('json',$data);
         }
+
     }
 
 

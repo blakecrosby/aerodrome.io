@@ -2,7 +2,8 @@
 
 # Validate GeoJSON
 function validateGeoJSON($json) {
-    $json = json_decode(file_get_contents('php://input'));
+    $input = $json;
+    $json = json_decode($input);
     $error = new stdClass();
 
     if ($json === NULL) {
@@ -31,6 +32,6 @@ function validateGeoJSON($json) {
         return $error;
     }
     else {
-        return $json;
+        return array("raw" => $input, "object" => $json);
     }
 }
