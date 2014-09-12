@@ -72,8 +72,8 @@ _Note: The `ident` parameter is not required, and will be ignored._
             {
                 "type":"Point",
                 "coordinates":[
-                    100.0,
-                    0.0
+                    -79.358,
+                    43.823
                 ],
                 "properties": {"radius": 10}
             }
@@ -201,7 +201,7 @@ Get information about a specific navaid.
                 }
             ]
             
-## Searching [/navaid/search/{ident}]
+## Search [/navaid/search/{ident}]
 You can search for a particular navaid using an identifier or geographic reference.
 
 ### POST
@@ -225,8 +225,8 @@ Supported Geometry Types:
             {
                 "type":"Point",
                 "coordinates":[
-                    100.0,
-                    0.0
+                    -79.358,
+                    43.823
                 ],
                 "properties": {"radius": 10}
             }
@@ -236,19 +236,76 @@ Supported Geometry Types:
 
     + Body
 
-            FIXME
+            [
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "CY",
+                    "country_name": "Canada",
+                    "type": "NDB",
+                    "navaid_name": "BUTTONVILLE",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
+                    "variation": -10,
+                    "tzid": "America\/Toronto",
+                    "elevation": null
+                }
+            ]
 
 ### GET
 This call will return all navaids that match `ident`. 
 
 + Parameters
-    + ident (required,string,`KZ`) ... The airway identifier.
+    + ident (required,string,`KZ`) ... The navaid identifier.
     
 + Response 200 (application/json)
 
     + Body
     
-            FIXME
+            [
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "UU",
+                    "country_name": "Russia",
+                    "type": "NDB",
+                    "navaid_name": "VORKUTA",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[64.1083333333333,67.4799833333333]}",
+                    "variation": 23,
+                    "tzid": "Europe\/Moscow",
+                    "elevation": null
+                },
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "UN",
+                    "country_name": "Russia",
+                    "type": "NDB",
+                    "navaid_name": "SEVERNOYE",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[78.3572166666667,56.3383333333333]}",
+                    "variation": 11,
+                    "tzid": "Asia\/Novosibirsk",
+                    "elevation": null
+                },
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "CY",
+                    "country_name": "Canada",
+                    "type": "NDB",
+                    "navaid_name": "BUTTONVILLE",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
+                    "variation": -10,
+                    "tzid": "America\/Toronto",
+                    "elevation": null
+                },
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "UR",
+                    "country_name": "Russia",
+                    "type": "NDB",
+                    "navaid_name": "KIZLYAR",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[46.7138833333333,43.8347166666667]}",
+                    "variation": 6,
+                    "tzid": "Europe\/Moscow",
+                    "elevation": null
+                }
+            ]    
 
 # Group Airways
 Airways are predefined routes that use navaids as waypoints.
