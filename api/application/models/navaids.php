@@ -3,6 +3,10 @@
 class Navaids extends CI_Model {
 
 
+    function sleep($seconds) {
+        $this->db->query("select pg_sleep($seconds)",NULL,FALSE);
+    }
+
     # Get a list of all supported navaids.
     function types() {
         $this->db->select('id,type');

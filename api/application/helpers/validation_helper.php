@@ -28,7 +28,7 @@ function validateGeoJSON($json) {
     }
     elseif ($json->properties->radius > 50) {
         $error->code = 400;
-        $error->error = "Radius is greater than 50 nautical miles. Please use a smaller integer";
+        $error->error = "Radius is greater than 50 nautical miles. Please use a smaller radius";
         return $error;
     }
     else {
