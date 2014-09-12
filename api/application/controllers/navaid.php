@@ -2,17 +2,6 @@
 
 class Navaid extends CI_Controller {
 
-    public function waitforever($seconds)	{
-        $this->load->model('navaids');
-
-        $data['data'] = $this->navaids->sleep($seconds);
-
-    }
-
-    public function return503()	{
-        http_response_code(503);
-    }
-
     # /api/navaid/types
 	public function types()	{
 
@@ -37,13 +26,15 @@ class Navaid extends CI_Controller {
 
         $data['data'] = $this->navaids->get($type,$country,$ident);
 
+
+
         # Add the TZ Offset from tzid
-        $dateTimeZoneLocal = new DateTimeZone($data['data'][0]->tzid);
+        $dateTimeZoneLocal = new DateTimeZone($data['data']->tzid);
         $dateTimeZoneUTC = new DateTimeZone('Etc/UTC');
         $dateTimeUTC = new DateTime("now",$dateTimeZoneUTC);
         $timeOffset = $dateTimeZoneLocal->getOffset($dateTimeUTC);
 
-        $data['data'][0]->utc_offset = $timeOffset;
+        $data['data']->utc_offset = $timeOffset;
 
         if (isset($data['data']->error)) {
             $this->load->view("error",$data);

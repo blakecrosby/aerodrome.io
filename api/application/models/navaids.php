@@ -44,11 +44,13 @@ class Navaids extends CI_Model {
         $this->db->where(array('navaid.type'=>'navaidtype.id','navaid.country'=>'country.id'), NULL,FALSE);
 
 
-        $this->db->where(array("country" => $country, "ident" => $ident));
+        $this->db->where(array("country" => $country, "ident" => $ident, "navaidtype.type" => $type));
+
         $q = $this->db->get();
 
         if ($q->num_rows() == 1) {
-            return $q->result();
+
+            return $q->result()[0];
         }
         else {
             $data = new stdClass();
