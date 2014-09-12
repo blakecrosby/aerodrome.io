@@ -310,13 +310,14 @@ This call will return all navaids that match `ident`.
 # Group Airways
 Airways are predefined routes that use navaids as waypoints.
 
-## Specific Airway [/airway/{ident}]
+## Specific Airway [/airway/{country}/{ident}]
 
 ### GET
 This call will return the list of navaids in order that make up the airway.
 
 + Parameters
-    + ident (string) ... The airway identifier.
+    + country (required,string,`CY`) ... The country in which the airway begins or ends.
+    + ident (required,string,`V90`) ... The airway identifier.
     
 + Response 200 (application/json)
 
@@ -324,16 +325,30 @@ This call will return the list of navaids in order that make up the airway.
     
             FIXME
             
-## Find Airways Crossing Route [/airway/search/]
+## Search [/airway/search/{ident}]
+
+### GET
+This call will return all airways that match `ident`. 
+
++ Parameters
+    + ident (required,string,`V90`) ... The airway identifier.
+
++ Response 200 (application/json)
+
+    + Body
+    
+            FIXME    
 
 ### POST
-This call will return the list of airways that cross your route.
+This call will return the list of airways that cross a particular route.
 
 POST data must be valid GeoJSON.
 
 Supported Geometry Types:
 
 * LINESTRING
+
+_Note: The `ident` parameter is not required, and will be ignored._
 
 + Request (application/json)
 
@@ -355,6 +370,8 @@ Supported Geometry Types:
     + Body
 
             FIXME
+            
+            
 
 # Group Airspace            
 Airspace is defined areas where special rules apply. There are generally two main types of 
