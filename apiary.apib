@@ -72,8 +72,8 @@ _Note: The `ident` parameter is not required, and will be ignored._
             {
                 "type":"Point",
                 "coordinates":[
-                    100.0,
-                    0.0
+                    -79.358,
+                    43.823
                 ],
                 "properties": {"radius": 10}
             }
@@ -225,8 +225,8 @@ Supported Geometry Types:
             {
                 "type":"Point",
                 "coordinates":[
-                    100.0,
-                    0.0
+                    -79.358,
+                    43.823
                 ],
                 "properties": {"radius": 10}
             }
@@ -236,7 +236,19 @@ Supported Geometry Types:
 
     + Body
 
-            FIXME
+            [
+                {
+                    "navaid_ident": "KZ",
+                    "country_ident": "CY",
+                    "country_name": "Canada",
+                    "type": "NDB",
+                    "navaid_name": "BUTTONVILLE",
+                    "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
+                    "variation": -10,
+                    "tzid": "America\/Toronto",
+                    "elevation": null
+                }
+            ]
 
 ### GET
 This call will return all navaids that match `ident`. 
