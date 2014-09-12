@@ -186,20 +186,19 @@ Get information about a specific navaid.
 
     + Body
     
-            [
-                {
-                    "navaid_ident": "KZ",
-                    "country_ident": "CY",
-                    "country_name": "Canada",
-                    "type": "NDB",
-                    "navaid_name": "BUTTONVILLE",
-                    "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
-                    "variation": -10,
-                    "tzid": "America\/Toronto",
-                    "elevation": null,
-                    "utc_offset": -14400
-                }
-            ]
+            {
+                "navaid_ident": "KZ",
+                "country_ident": "CY",
+                "country_name": "Canada",
+                "type": "NDB",
+                "navaid_name": "BUTTONVILLE",
+                "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.3289333333333,43.9331]}",
+                "variation": -10,
+                "tzid": "America\/Toronto",
+                "elevation": null,
+                "utc_offset": -14400
+            }
+
             
 ## Search [/navaid/search/{ident}]
 You can search for a particular navaid using an identifier or geographic reference.
@@ -412,6 +411,9 @@ touches, or is contained by the airspace.
     + Body
 
             FIXME
+            
+# Group NOTAMs
+TODO
 
 # Group Countries     
 Countries are organized by their ICAO aerodrome prefixes. For example: "Canada" would be `CY`, Australia
