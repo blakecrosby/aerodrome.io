@@ -9,13 +9,13 @@ class Airway extends CI_Controller {
         $this->load->model('airways');
 
         $data['data'] = $this->airways->get_geometry($country,$ident);
-        $data['data']->waypoints = $this->airways->get($country,$ident);
 
-
+        #if the first query fails, don't bother doing the rest (located in else)
         if (isset($data['data']->error)) {
             $this->load->view("error",$data);
         }
         else {
+            $data['data']->waypoints = $this->airways->get($country,$ident);
             $this->load->view('json',$data);
         }
 
@@ -25,7 +25,7 @@ class Airway extends CI_Controller {
     # ident is optional
     public function search($ident = false) {
 
-        $this->load->model('navaids');
+        $this->load->model('airways');
         $postdata = file_get_contents('php://input');
 
 
@@ -36,7 +36,7 @@ class Airway extends CI_Controller {
             # Otherwise it returns a php Object with error details.
             $json = validateGeoJSON($postdata);
             if (is_array($json)) {
-                $data['data'] = $this->navaids->search($json,$ident);
+                $data['data'] = $this->airways->search($json,$ident);
                 $this->load->view('json',$data);
             }
             else {
@@ -45,7 +45,7 @@ class Airway extends CI_Controller {
             }
         }
         else {
-            $data['data'] = $this->navaids->search(NULL,$ident);
+            $data['data'] = $this->airways->search(NULL,$ident);
             $this->load->view('json',$data);
         }
 
