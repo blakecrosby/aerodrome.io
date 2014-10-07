@@ -325,7 +325,54 @@ This call will return the list of navaids in order that make up the airway.
 
     + Body
     
-            FIXME
+            {
+                "name": "V90",
+                "geometry": "{\"type\":\"LineString\",\"coordinates\":[[-83.5939,42.4086333333333],[-82.8183166666667,42.38325],[-82.4519666666667,42.36935],[-81.5819333333333,42.3313833333333],[-80.7619166666667,42.28985],[-79.2741,42.49055]]}",
+                "waypoints": [
+                    {
+                        "navaid": "SVM",
+                        "geometry": "{\"type\":\"Point\",\"coordinates\":[-83.5939,42.4086333333333]}",
+                        "navaid_country": "K5",
+                        "order": 1,
+                        "navaid_type": "VORTAC"
+                    },
+                    {
+                        "navaid": "COFGI",
+                        "geometry": "{\"type\":\"Point\",\"coordinates\":[-82.8183166666667,42.38325]}",
+                        "navaid_country": "K5",
+                        "order": 2,
+                        "navaid_type": "INTERSECTION"
+                    },
+                    {
+                        "navaid": "MOONN",
+                        "geometry": "{\"type\":\"Point\",\"coordinates\":[-82.4519666666667,42.36935]}",
+                        "navaid_country": "CY",
+                        "order": 3,
+                        "navaid_type": "INTERSECTION"
+                    },
+                    {
+                        "navaid": "BROKK",
+                        "geometry": "{\"type\":\"Point\",\"coordinates\":[-81.5819333333333,42.3313833333333]}",
+                        "navaid_country": "CY",
+                        "order": 4,
+                        "navaid_type": "INTERSECTION"
+                    },
+                    {
+                        "navaid": "BEWEL",
+                        "geometry": "{\"type\":\"Point\",\"coordinates\":[-80.7619166666667,42.28985]}",
+                        "navaid_country": "K5",
+                        "order": 5,
+                        "navaid_type": "INTERSECTION"
+                    },
+                    {
+                        "navaid": "DKK",
+                        "geometry": "{\"type\":\"Point\",\"coordinates\":[-79.2741,42.49055]}",
+                        "navaid_country": "K6",
+                        "order": 6,
+                        "navaid_type": "VORTAC"
+                    }
+                ]
+            }
             
 ## Search [/airway/search/{ident}]
 
@@ -356,15 +403,28 @@ _Note: The `ident` parameter is not required, and will be ignored._
 
     + Body
     
-            FIXME
-            {
-                "type":"Point",
-                "coordinates":[
-                    100.0,
-                    0.0
+              {
+                "type": "LineString",
+                "coordinates": [
+                  [
+                    -79.6783447265625,
+                    43.6599240747891
+                  ],
+                  [
+                    -79.1949462890625,
+                    43.95328204198018
+                  ],
+                  [
+                    -78.9422607421875,
+                    43.90185050527358
+                  ],
+                  [
+                    -78.81591796875,
+                    44.134913443750726
+                  ]
                 ],
-                "properties": {"radius": 10}
-            }
+                "properties": {"radius":10}
+              }
 
 
 + Response 200 (application/json)
