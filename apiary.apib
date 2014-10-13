@@ -380,16 +380,37 @@ This call will return the list of navaids in order that make up the airway.
 This call will return all airways that match `ident`. 
 
 + Parameters
-    + ident (required,string,`V90`) ... The airway identifier.
+    + ident (required,string,`V36`) ... The airway identifier.
 
 + Response 200 (application/json)
 
     + Body
     
-            FIXME    
+            [
+                {
+                    "name": "V36",
+                    "country": "CY"
+                },
+                {
+                    "name": "V36",
+                    "country": "MM"
+                },
+                {
+                    "name": "V36",
+                    "country": "RJ"
+                },
+                {
+                    "name": "V36",
+                    "country": "LF"
+                },
+                {
+                    "name": "V36",
+                    "country": "VI"
+                }
+            ]    
 
 ### POST
-This call will return the list of airways that cross a particular route.
+This call will return the list of airways that cross a particular route. 
 
 POST data must be valid GeoJSON.
 
@@ -423,7 +444,7 @@ _Note: The `ident` parameter is not required, and will be ignored._
                     44.134913443750726
                   ]
                 ],
-                "properties": {"radius":10}
+                "properties": {"radius": 0}
               }
 
 
@@ -431,7 +452,56 @@ _Note: The `ident` parameter is not required, and will be ignored._
 
     + Body
 
-            FIXME
+            [
+                {
+                    "name": "J522",
+                    "country": "K6"
+                },
+                {
+                    "name": "J525",
+                    "country": "CY"
+                },
+                {
+                    "name": "J531",
+                    "country": "K6"
+                },
+                {
+                    "name": "J556",
+                    "country": "CY"
+                },
+                {
+                    "name": "NCA20",
+                    "country": "PA"
+                },
+                {
+                    "name": "NCA21",
+                    "country": "CY"
+                },
+                {
+                    "name": "T614",
+                    "country": "CY"
+                },
+                {
+                    "name": "V164",
+                    "country": "CY"
+                },
+                {
+                    "name": "V320",
+                    "country": "CY"
+                },
+                {
+                    "name": "V34",
+                    "country": "CY"
+                },
+                {
+                    "name": "V36",
+                    "country": "CY"
+                },
+                {
+                    "name": "V98",
+                    "country": "CY"
+                }
+            ]
             
             
 
@@ -462,10 +532,10 @@ touches, or is contained by the airspace.
             {
                 "type":"Point",
                 "coordinates":[
-                    100.0,
-                    0.0
+                    -80.66,
+                    44.67
                 ],
-                "properties": {"radius": 10}
+                "properties": {"radius": 2}
             }
 
 
@@ -473,7 +543,15 @@ touches, or is contained by the airspace.
 
     + Body
 
-            FIXME
+                {
+                    "name": "R-501",
+                    "class": "Restricted Area",
+                    "bottom": 0,
+                    "top": 12000,
+                    "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-80.7278,44.62775],[-80.7696833333333,44.7133333333333],[-80.77
+            27666666667,44.7444833333333],[-80.6588666666667,44.7444833333333],[-80.6213666666667,44.7402833333333],[-80.5958666666667,44
+            .7139333333333],[-80.59305,44.6863666666667],[-80.6280666666667,44.6625166666667],[-80.7278,44.62775]]]}"
+                }
             
 # Group Countries     
 Countries are organized by their ICAO aerodrome prefixes. For example: "Canada" would be `CY`, Australia
