@@ -22,7 +22,7 @@ class Airway extends CI_Controller {
     }
 
     # /api/search/{ident}
-    # ident is optional
+    # ident is optional on POSTS
     public function search($ident = false) {
 
         $this->load->model('airways');

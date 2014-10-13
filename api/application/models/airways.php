@@ -45,11 +45,11 @@ class Airways extends CI_Model {
 
         if ($json) {
             $radius = $json['object']->properties->radius;
+            $q = $this->db->query("select airway.name,country from airway left outer join ( select st_makeline(location order by direction) as geometry,airway.name,airway.number from navaid,airway where airway.waypoint = navaid.ident and airway.country = navaid.country and airway.waypointtype = navaid.type  group by airway.name,airway.number) as foo on (foo.name = airway.name and foo.number = airway.number )where st_crosses(geometry,st_setsrid(st_geomfromgeojson('$json[raw]'),4326)) and airway.direction = 1", FALSE);
         }
-        #print "search";
-        #die;
-
-        $q = $this->db->query("select airway.name,country from airway left outer join ( select st_makeline(location order by direction) as geometry,airway.name,airway.number from navaid,airway where airway.waypoint = navaid.ident and airway.country = navaid.country and airway.waypointtype = navaid.type  group by airway.name,airway.number) as foo on (foo.name = airway.name and foo.number = airway.number )where st_crosses(geometry,st_setsrid(st_geomfromgeojson('$json[raw]'),4326)) and airway.direction = 1", FALSE);
+        else {
+            $q = $this->db->query("select airway.name,country from airway left outer join ( select st_makeline(location order by direction) as geometry,airway.name,airway.number from navaid,airway where airway.waypoint = navaid.ident and airway.country = navaid.country and airway.waypointtype = navaid.type  group by airway.name,airway.number) as foo on (foo.name = airway.name and foo.number = airway.number )where airway.name = '$ident' and airway.direction = 1", FALSE);
+        }
 
         #$q = $this->db->get();
 
